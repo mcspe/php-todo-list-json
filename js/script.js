@@ -3,27 +3,34 @@ const {createApp} = Vue;
 createApp({
   data(){
     return {
+      apiUrl: './php/server.php',
       noTaskMsg: 'Non hai nulla in programma <i class="fa-regular fa-face-grin-wink"></i>',
       newTask: '',
       tasks: [
-        {
-          text: 'creare cartella repo',
-          done: false
-        },
-        {
-          text: 'creare file README',
-          done: false
-        },
-        {
-          text: 'inizializzare GitHub',
-          done: false
-        }
+        // {
+        //   text: 'creare cartella repo',
+        //   done: false
+        // },
+        // {
+        //   text: 'creare file README',
+        //   done: false
+        // },
+        // {
+        //   text: 'inizializzare GitHub',
+        //   done: false
+        // }
       ],
       taskDoneStyle: 'text-decoration-line-through',
       errorMsg: ''
     }
   },
   methods:{
+    getApi(apiUrl) {
+      axios.get(apiUrl)
+        .then(result => {
+          console.log(result.data);
+        });
+    },
     toggleDone(index){
       if (!(this.tasks[index].done)){
         this.tasks[index].done = !this.tasks[index].done;

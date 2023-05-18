@@ -4,7 +4,7 @@ createApp({
   data(){
     return {
       apiUrl: './php/server.php',
-      noTaskMsg: 'Non hai nulla in programma <i class="fa-regular fa-face-grin-wink"></i>',
+      noTaskMsg: 'Non hai nulla in programma <i class="fa-regular fa-face-grin-wink"></i><br>Inserisci un nuovo task per aggiungerlo alla tua lista',
       newTask: '',
       tasks: [
         // {

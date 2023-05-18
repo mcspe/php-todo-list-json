@@ -10,23 +10,19 @@
 
   // add task
   if(isset($_POST['add'])) {
-    $toDoList[] = [
-      'text' => $_POST['add'],
-      'done' => false
-    ];
+    array_unshift($toDoList, 
+      [
+        'text' => $_POST['add'],
+        'done' => false
+      ]);
   }
 
   // remove task
   if(isset($_POST['remove'])) {
     array_splice($toDoList, $_POST['remove'], 1);
-    // $toDoList[] = [
-    //   'text' => $_POST['remove'],
-    //   'done' => false
-    // ];
   }
 
   $passString = json_encode($toDoList);
   echo $passString;
   file_put_contents('toDoList.json', $passString);
-
 ?>

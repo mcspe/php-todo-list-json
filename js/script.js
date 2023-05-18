@@ -41,21 +41,17 @@ createApp({
     },
     toggleDone(index){
       this.modifyApi('indexToToggle', index);
-      // this.tasks[index].done = !this.tasks[index].done;
     },
     addTask(){
       if (this.newTask != '') {
-        const newObjTask = {
-          text: this.newTask,
-          done: false
-        }
+        this.modifyApi('add', this.newTask)
         this.newTask = '';
-        this.tasks.push(newObjTask);
       }
     },
     removeTask(index){
       if (this.tasks[index].done) {
-        this.tasks.splice(index, 1);
+        this.modifyApi('remove', index);
+        // this.tasks.splice(index, 1);
       } else {
         this.errorMsg = 'Per rimuovere un task è necessario averlo completato prima';
         setTimeout(() => {

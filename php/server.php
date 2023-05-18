@@ -1,10 +1,14 @@
 <?php
-  $toDoString = file_get_contents('toDoList.json');
   header('Content-Type: application/json');
-  echo $toDoList;
+  $toDoString = file_get_contents('toDoList.json');
   $toDoList = json_decode($toDoString, true);
 
-  // $passString = json_encode($toDoList);
-  // file_put_contents('toDoList.json', $passString);
+  if(isset($_POST['indexToToggle'])) {
+    $toDoList[$_POST['indexToToggle']]['done'] = !$toDoList[$_POST['indexToToggle']]['done'];
+  }
+
+  $passString = json_encode($toDoList);
+  echo $passString;
+  file_put_contents('toDoList.json', $passString);
 
 ?>

@@ -20,7 +20,7 @@ createApp({
         //   done: false
         // }
       ],
-      taskDoneStyle: 'text-decoration-line-through',
+      taskDoneStyle: 'text-decoration-line-through text-danger',
       errorMsg: ''
     }
   },
@@ -28,18 +28,20 @@ createApp({
     getApi(apiUrl) {
       axios.get(apiUrl)
         .then(result => {
-          console.log(result.data);
+          this.tasks = result.data;
+        });
+    },
+    modifyApi(key, attr) {
+      const data = new FormData();
+      data.append(key, attr);
+      axios.post(this.apiUrl, data)
+        .then(result => {
+          this.tasks = result.data;
         });
     },
     toggleDone(index){
-      if (!(this.tasks[index].done)){
-        this.tasks[index].done = !this.tasks[index].done;
-        console.log(this.tasks[index].text, 'vero');
-      } 
-      else {
-        this.tasks[index].done = !this.tasks[index].done;
-        console.log(this.tasks[index].text, 'falso');
-      }
+      this.modifyApi('indexToToggle', index);
+      // this.tasks[index].done = !this.tasks[index].done;
     },
     addTask(){
       if (this.newTask != '') {
@@ -63,6 +65,6 @@ createApp({
     }
   },
   mounted(){
-    
+    this.getApi(this.apiUrl);
   }
 }).mount('#app');
